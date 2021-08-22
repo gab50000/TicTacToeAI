@@ -12,5 +12,4 @@ class RandomPlayer : public Player {
  public:
   RandomPlayer(std::shared_ptr<Board> board, Field field);
   std::optional<Position> decide_move() override;
-  void make_move() override;
 };

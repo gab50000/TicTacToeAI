@@ -10,6 +10,10 @@ std::optional<Position> QPlayer::decide_move() {
   std::vector<float> scores;
   std::vector<Position> possible_moves = _board->get_empty_fields();
 
+  if (possible_moves.empty()) {
+    return {};
+  }
+
   auto state_to_score = [*this](const Position& pos) -> float {
     Board new_board = *_board;
     new_board.set_field(pos, _field);
@@ -32,7 +36,7 @@ std::optional<Position> QPlayer::decide_move() {
   std::transform(possible_moves.begin(), possible_moves.end(), scores.begin(),
                  state_to_score);
 
-  return {};
+  auto max_pos = std::max_element(scores.begin(), scores.end());
+  int max_idx = std::distance(scores.begin(), max_pos);
+  return possible_moves[max_idx];
 }
-
-void QPlayer::make_move() {}

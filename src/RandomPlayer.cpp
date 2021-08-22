@@ -19,10 +19,3 @@ std::optional<Position> RandomPlayer::decide_move() {
   int i = dist(_gen);
   return empty_fields[i];
 }
-
-void RandomPlayer::make_move() {
-  auto move = decide_move();
-  if (move.has_value()) {
-    set_field(move.value());
-  }
-}

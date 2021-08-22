@@ -18,6 +18,6 @@ class Player {
  public:
   Player(std::shared_ptr<Board> board, Field field);
   virtual std::optional<Position> decide_move() = 0;
-  virtual void make_move() = 0;
+  virtual void make_move();
   void set_field(const Position& pos);
 };

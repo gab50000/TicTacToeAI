@@ -17,5 +17,4 @@ class QPlayer : public Player {
  public:
   QPlayer(std::shared_ptr<Board> board, Field field);
   std::optional<Position> decide_move() override;
-  void make_move() override;
 };
