@@ -2,6 +2,7 @@
 #include <memory>
 
 #include "Board.hpp"
+#include "QPlayer.hpp"
 #include "RandomPlayer.hpp"
 
 int main() {

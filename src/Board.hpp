@@ -4,7 +4,7 @@
 #include <ostream>
 #include <vector>
 
-enum class Field { X, O };
+enum class Field : unsigned int { X = 1, O };
 
 class OutOfBoundsException : public std::exception {};
 
@@ -26,10 +26,19 @@ class Board {
  public:
   Board();
   void set_field(const Position& pos, Field);
+  std::optional<Field> get_field(const Position& pos) const;
   std::vector<Position> get_empty_fields();
   std::optional<Field> get_winner();
 
   friend std::ostream& operator<<(std::ostream& os, const Board& board);
+  friend bool operator==(const Board& lhs, const Board& rhs);
 };
 
 std::ostream& operator<<(std::ostream& os, std::optional<Field> field);
+
+namespace std {
+template <>
+struct hash<Board> {
+  std::size_t operator()(Board const& board) const noexcept;
+};
+};  // namespace std

@@ -1,5 +1,6 @@
 #include "Board.hpp"
 
+#include <cmath>
 #include <iostream>
 
 Position::Position(int i, int j) {
@@ -75,6 +76,10 @@ void Board::set_field(const Position& pos, Field field) {
   _board[pos.get_i()][pos.get_j()] = field;
 }
 
+std::optional<Field> Board::get_field(const Position& pos) const {
+  return _board[pos.get_i()][pos.get_j()];
+}
+
 std::ostream& operator<<(std::ostream& os, std::optional<Field> field) {
   if (field.has_value() && field.value() == Field::O) {
     os << "O";
@@ -95,3 +100,35 @@ std::ostream& operator<<(std::ostream& os, const Board& board) {
      << board._board[2][2];
   return os;
 }
+
+bool operator==(const Board& lhs, const Board& rhs) {
+  for (unsigned int i = 0; i < 3; i++) {
+    for (unsigned int j = 0; j < 3; j++) {
+      if (lhs._board[i][j] != rhs._board[i][j]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+namespace std {
+std::size_t hash<Board>::operator()(Board const& board) const noexcept {
+  std::size_t sum = 0;
+  for (int n = 0; n < 9; n++) {
+    int i = n / 3;
+    int j = n % 3;
+
+    int val;
+    auto field = board.get_field({i, j});
+    if (field.has_value()) {
+      val = static_cast<int>(field.value());
+    } else {
+      val = 0;
+    }
+
+    sum += std::pow(3, 8 - n) * val;
+  }
+  return sum;
+}  // namespace std
+}  // namespace std

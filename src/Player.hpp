@@ -21,12 +21,3 @@ class Player {
   virtual void make_move() = 0;
   void set_field(const Position& pos);
 };
-
-class QPlayer : public Player {
-  using State = std::vector<std::optional<Field>>;
-  using Action = Position;
-  using Reward = double;
-
- private:
-  std::unordered_map<std::pair<State, Action>, Reward> _value_function;
-};
