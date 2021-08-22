@@ -1,6 +1,7 @@
 #pragma once
 
 #include <optional>
+#include <ostream>
 #include <vector>
 
 enum class Field { X, O };
@@ -13,6 +14,8 @@ class Position {
 
  public:
   Position(int i, int j);
+
+  friend std::ostream& operator<<(std::ostream& os, const Position& pos);
 };
 
 class Board {
@@ -21,4 +24,5 @@ class Board {
  public:
   Board();
   void set_field(const Position& pos, Field);
+  std::vector<Position> get_empty_fields();
 };

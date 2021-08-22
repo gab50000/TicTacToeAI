@@ -6,3 +6,6 @@ project(
 )
 
 add_library(tictactoe STATIC src/Board.hpp src/Board.cpp src/Player.hpp src/Player.cpp)
+
+add_executable(main src/main.cpp)
+target_link_libraries(main tictactoe)
