@@ -6,6 +6,8 @@
 
 enum class Field : unsigned int { X = 1, O };
 
+Field opposite(Field field);
+
 class OutOfBoundsException : public std::exception {};
 
 class Position {

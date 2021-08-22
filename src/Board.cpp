@@ -132,3 +132,10 @@ std::size_t hash<Board>::operator()(Board const& board) const noexcept {
   return sum;
 }  // namespace std
 }  // namespace std
+
+Field opposite(Field field) {
+  if (field == Field::O) {
+    return Field::X;
+  }
+  return Field::O;
+}
