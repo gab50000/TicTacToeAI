@@ -10,5 +10,11 @@ int main() {
   RandomPlayer player1(board, Field::O);
   RandomPlayer player2(board, Field::X);
 
-  std::cout << player1.decide_move().value() << std::endl;
+  while (!board->get_winner().has_value()) {
+    std::cout << *board << std::endl << std::endl;
+    player1.make_move();
+    player2.make_move();
+  }
+  std::cout << "Game Over:" << std::endl;
+  std::cout << *board << std::endl << std::endl;
 }

@@ -14,6 +14,8 @@ class Position {
 
  public:
   Position(int i, int j);
+  int get_i() const;
+  int get_j() const;
 
   friend std::ostream& operator<<(std::ostream& os, const Position& pos);
 };

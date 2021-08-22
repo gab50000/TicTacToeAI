@@ -14,6 +14,14 @@ Position::Position(int i, int j) {
   this->j = j;
 }
 
+int Position::get_i() const {
+  return i;
+}
+
+int Position::get_j() const {
+  return j;
+}
+
 std::ostream& operator<<(std::ostream& os, const Position& pos) {
   os << "Position{" << pos.i << ", " << pos.j << "}";
   return os;
@@ -63,6 +71,10 @@ std::optional<Field> Board::get_winner() {
   return {};
 }
 
+void Board::set_field(const Position& pos, Field field) {
+  _board[pos.get_i()][pos.get_j()] = field;
+}
+
 std::ostream& operator<<(std::ostream& os, std::optional<Field> field) {
   if (field.has_value() && field.value() == Field::O) {
     os << "O";
@@ -80,6 +92,6 @@ std::ostream& operator<<(std::ostream& os, const Board& board) {
   os << board._board[1][0] << " | " << board._board[1][1] << " | "
      << board._board[1][2] << std::endl;
   os << board._board[2][0] << " | " << board._board[2][1] << " | "
-     << board._board[2][2] << std::endl;
+     << board._board[2][2];
   return os;
 }

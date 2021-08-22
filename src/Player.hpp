@@ -16,7 +16,8 @@ class Player {
  public:
   Player(std::shared_ptr<Board> board, Field field);
   virtual std::optional<Position> decide_move() = 0;
-  virtual void make_move(const Position& pos) = 0;
+  virtual void make_move() = 0;
+  void set_field(const Position& pos);
 };
 
 class RandomPlayer : public Player {
@@ -26,5 +27,5 @@ class RandomPlayer : public Player {
  public:
   RandomPlayer(std::shared_ptr<Board> board, Field field);
   std::optional<Position> decide_move() override;
-  void make_move(const Position& pos) override;
+  void make_move() override;
 };

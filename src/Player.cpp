@@ -5,6 +5,10 @@
 Player::Player(std::shared_ptr<Board> board, Field field)
     : _board(board), _field(field) {}
 
+void Player::set_field(const Position& pos) {
+  _board->set_field(pos, _field);
+}
+
 RandomPlayer::RandomPlayer(std::shared_ptr<Board> board, Field field)
     : Player(board, field), _gen(std::random_device()()) {}
 
@@ -23,4 +27,9 @@ std::optional<Position> RandomPlayer::decide_move() {
   return empty_fields[i];
 }
 
-void RandomPlayer::make_move(const Position& pos) {}
+void RandomPlayer::make_move() {
+  auto move = decide_move();
+  if (move.has_value()) {
+    set_field(move.value());
+  }
+}
