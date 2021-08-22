@@ -25,4 +25,9 @@ class Board {
   Board();
   void set_field(const Position& pos, Field);
   std::vector<Position> get_empty_fields();
+  std::optional<Field> get_winner();
+
+  friend std::ostream& operator<<(std::ostream& os, const Board& board);
 };
+
+std::ostream& operator<<(std::ostream& os, std::optional<Field> field);
