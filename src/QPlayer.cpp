@@ -7,8 +7,8 @@ QPlayer::QPlayer(std::shared_ptr<Board> board, Field field)
     : Player(board, field) {}
 
 std::optional<Position> QPlayer::decide_move() {
-  std::vector<float> scores;
   std::vector<Position> possible_moves = _board->get_empty_fields();
+  std::vector<float> scores(possible_moves.size());
 
   if (possible_moves.empty()) {
     return {};

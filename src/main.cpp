@@ -9,7 +9,7 @@ int main() {
   auto board = std::make_shared<Board>();
 
   RandomPlayer player1(board, Field::O);
-  RandomPlayer player2(board, Field::X);
+  QPlayer player2(board, Field::X);
 
   while (!board->get_winner().has_value() &&
          !board->get_empty_fields().size() == 0) {
