@@ -4,8 +4,10 @@
 #include "Board.hpp"
 #include "QPlayer.hpp"
 #include "RandomPlayer.hpp"
+#include "spdlog/spdlog.h"
 
 int main() {
+  spdlog::info("Hello");
   auto board = std::make_shared<Board>();
 
   RandomPlayer player1(board, Field::O);
