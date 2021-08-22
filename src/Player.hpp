@@ -1,12 +1,14 @@
 #pragma once
-
 #include <memory>
 #include <optional>
-#include <random>
+#include <unordered_map>
+#include <utility>
 
-class Board;
-enum class Field;
-class Position;
+#include "Board.hpp"
+
+// class Board;
+// enum class Field;
+// class Position;
 
 class Player {
  protected:
@@ -20,12 +22,11 @@ class Player {
   void set_field(const Position& pos);
 };
 
-class RandomPlayer : public Player {
- private:
-  std::mt19937 _gen;
+class QPlayer : public Player {
+  using State = std::vector<std::optional<Field>>;
+  using Action = Position;
+  using Reward = double;
 
- public:
-  RandomPlayer(std::shared_ptr<Board> board, Field field);
-  std::optional<Position> decide_move() override;
-  void make_move() override;
+ private:
+  std::unordered_map<std::pair<State, Action>, Reward> _value_function;
 };
