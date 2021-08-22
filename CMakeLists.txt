@@ -5,4 +5,4 @@ project(
     TicTacToe
 )
 
-add_library(tictactoe STATIC src/Board.hpp src/Board.cpp)
+add_library(tictactoe STATIC src/Board.hpp src/Board.cpp src/Player.hpp src/Player.cpp)
