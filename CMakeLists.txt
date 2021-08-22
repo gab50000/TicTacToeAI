@@ -18,3 +18,4 @@ add_library(tictactoe STATIC src/Board.hpp src/Board.cpp src/Player.hpp src/Play
 
 add_executable(main src/main.cpp)
 target_link_libraries(main tictactoe spdlog)
+target_link_libraries(tictactoe spdlog)

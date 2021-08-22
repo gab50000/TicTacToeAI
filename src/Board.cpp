@@ -139,3 +139,7 @@ Field opposite(Field field) {
   }
   return Field::O;
 }
+
+void GameRecord::update_states(std::shared_ptr<const Board> board) {
+  states.push_back(*board);
+}

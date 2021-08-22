@@ -17,4 +17,5 @@ class QPlayer : public Player {
  public:
   QPlayer(std::shared_ptr<Board> board, Field field);
   std::optional<Position> decide_move() override;
+  void update_value_function(const GameRecord& record, double decay);
 };

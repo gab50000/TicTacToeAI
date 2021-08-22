@@ -15,3 +15,6 @@ void Player::make_move() {
     set_field(move.value());
   }
 }
+std::shared_ptr<Board> Player::get_board() const {
+  return _board;
+}

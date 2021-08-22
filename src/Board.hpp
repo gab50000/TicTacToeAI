@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <optional>
 #include <ostream>
 #include <vector>
@@ -44,3 +45,10 @@ struct hash<Board> {
   std::size_t operator()(Board const& board) const noexcept;
 };
 };  // namespace std
+
+struct GameRecord {
+  std::vector<Board> states;
+  std::optional<Field> winner;
+
+  void update_states(std::shared_ptr<const Board> board);
+};
