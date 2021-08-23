@@ -21,4 +21,5 @@ class Player {
   virtual void make_move();
   void set_field(const Position& pos);
   std::shared_ptr<Board> get_board() const;
+  void set_board(std::shared_ptr<Board> board);
 };

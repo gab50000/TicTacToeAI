@@ -18,3 +18,7 @@ void Player::make_move() {
 std::shared_ptr<Board> Player::get_board() const {
   return _board;
 }
+
+void Player::set_board(std::shared_ptr<Board> board) {
+  _board = board;
+}

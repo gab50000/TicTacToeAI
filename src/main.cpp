@@ -1,4 +1,4 @@
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_INFO
 #include <spdlog/fmt/ostr.h>
 #include <spdlog/spdlog.h>
 
@@ -43,10 +43,28 @@ int main() {
   RandomPlayer player1(board, Field::O);
   QPlayer player2(board, Field::X);
 
-  GameRecord record = play_game(player1, player2);
+  int x_wins = 0;
+  int o_wins = 0;
 
-  if (record.winner.has_value()) {
-    std::cout << "Winner is " << record.winner.value() << std::endl;
+  while (true) {
+    auto board = std::make_shared<Board>();
+    player1.set_board(board);
+    player2.set_board(board);
+
+    GameRecord record = play_game(player1, player2);
+
+    if (record.winner.has_value()) {
+      if (record.winner.value() == Field::X) {
+        x_wins++;
+      } else {
+        o_wins++;
+      }
+    }
+
+    SPDLOG_INFO("X: {}, O: {}, Ratio: {}", x_wins, o_wins,
+                (double)x_wins / o_wins);
+
+    player2.update_value_function(record, 0.9, 0.3);
   }
 }
 

@@ -56,7 +56,7 @@ std::vector<float> QPlayer::determine_state_scores(const GameRecord& record,
     scores[states_length - 1] = -1;
   }
 
-  for (unsigned int i = states_length - 2; i <= 0; i--) {
+  for (unsigned int i = states_length - 2; i > 0; i--) {
     scores[i] = decay * scores[i + 1];
   }
 
