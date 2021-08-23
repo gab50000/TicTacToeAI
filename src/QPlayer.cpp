@@ -30,11 +30,7 @@ std::optional<Position> QPlayer::decide_move() {
       }
     }
 
-    if (_value_function.find(new_board) != _value_function.end()) {
-      SPDLOG_DEBUG("Found value {}", _value_function.at(new_board));
-      return _value_function.at(new_board);
-    }
-    return 0;
+    return this->get_score(new_board);
   };
 
   std::transform(possible_moves.begin(), possible_moves.end(), scores.begin(),
@@ -67,4 +63,25 @@ std::vector<float> QPlayer::determine_state_scores(const GameRecord& record,
   return scores;
 }
 
-void QPlayer::update_value_function(const GameRecord& record, double decay) {}
+void QPlayer::update_value_function(const GameRecord& record,
+                                    double decay,
+                                    double learning_rate) {
+  auto scores = determine_state_scores(record, decay);
+
+  for (unsigned int i = 0; i < record.states.size(); i++) {
+    Board current_state = record.states[i];
+    float current_score = get_score(current_state);
+    float new_score = scores[i];
+
+    _value_function[current_state] +=
+        learning_rate * (new_score - current_score);
+  }
+}
+
+double QPlayer::get_score(const Board& board) const {
+  if (_value_function.find(board) != _value_function.end()) {
+    SPDLOG_DEBUG("Found value {}", _value_function.at(board));
+    return _value_function.at(board);
+  }
+  return 0;
+}
