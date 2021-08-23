@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <optional>
+#include <vector>
 
 QPlayer::QPlayer(std::shared_ptr<Board> board, Field field)
     : Player(board, field) {}
@@ -44,14 +45,26 @@ std::optional<Position> QPlayer::decide_move() {
   return possible_moves[max_idx];
 }
 
-void QPlayer::update_value_function(const GameRecord& record, double decay) {
+std::vector<float> QPlayer::determine_state_scores(const GameRecord& record,
+                                                   double decay) const {
+  std::vector<float> scores(record.states.size());
+
+  unsigned int states_length = record.states.size();
   auto winner = record.winner;
-  float last_score;
+  float score;
   if (!winner.has_value()) {
-    last_score = 0;
+    scores[states_length - 1] = 0;
   } else if (winner.value() == _field) {
-    last_score = 1;
+    scores[states_length - 1] = 1;
   } else {
-    last_score = -1;
+    scores[states_length - 1] = -1;
   }
+
+  for (unsigned int i = states_length - 2; i <= 0; i--) {
+    scores[i] = decay * scores[i + 1];
+  }
+
+  return scores;
 }
+
+void QPlayer::update_value_function(const GameRecord& record, double decay) {}
