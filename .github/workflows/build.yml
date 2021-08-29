@@ -10,9 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install CMake
-      run: apt install cmake
+      run: sudo apt-get install cmake
     - name: Build
-      run: |
+      run: | 
+        mkdir build
         cd build
         cmake ..
-        make
+        make all
