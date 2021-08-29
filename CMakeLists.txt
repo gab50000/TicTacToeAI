@@ -16,3 +16,4 @@ FetchContent_MakeAvailable(spdlog)
 
 
 add_subdirectory(src)
+add_subdirectory(tests)

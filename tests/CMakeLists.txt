@@ -8,7 +8,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 enable_testing()
 
-add_executable(tests tests/test_Board.cpp)
-target_link_libraries(tests gtest_main tictactoe)
 get_target_property(tictactoe_INCLUDES tictactoe INCLUDE_DIRECTORIES)
+add_executable(tests test_Board.cpp)
+target_link_libraries(tests gtest_main tictactoe)
 target_include_directories(tests PRIVATE ${tictactoe_INCLUDES})
