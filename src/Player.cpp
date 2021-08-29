@@ -1,6 +1,5 @@
-#include "Player.hpp"
-
-#include "Board.hpp"
+#include <tictactoe/Board.hpp>
+#include <tictactoe/Player.hpp>
 
 Player::Player(std::shared_ptr<Board> board, Field field)
     : _board(board), _field(field) {}

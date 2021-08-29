@@ -1,6 +1,5 @@
-#include "RandomPlayer.hpp"
-
-#include "Board.hpp"
+#include <tictactoe/Board.hpp>
+#include <tictactoe/RandomPlayer.hpp>
 
 RandomPlayer::RandomPlayer(std::shared_ptr<Board> board, Field field)
     : Player(board, field), _gen(std::random_device()()) {}

@@ -1,7 +1,6 @@
-#include "Board.hpp"
-
 #include <cmath>
 #include <iostream>
+#include <tictactoe/Board.hpp>
 
 Position::Position(int i, int j) {
   if (i < 0 || i > 2) {

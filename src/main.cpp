@@ -4,10 +4,9 @@
 
 #include <iostream>
 #include <memory>
-
-#include "Board.hpp"
-#include "QPlayer.hpp"
-#include "RandomPlayer.hpp"
+#include <tictactoe/Board.hpp>
+#include <tictactoe/QPlayer.hpp>
+#include <tictactoe/RandomPlayer.hpp>
 
 GameRecord play_game(Player& player1, Player& player2) {
   GameRecord record;
@@ -46,6 +45,7 @@ int main() {
   int x_wins = 0;
   int o_wins = 0;
 
+  int counter = 0;
   while (true) {
     auto board = std::make_shared<Board>();
     player1.set_board(board);
@@ -61,10 +61,13 @@ int main() {
       }
     }
 
-    SPDLOG_INFO("X: {}, O: {}, Ratio: {}", x_wins, o_wins,
-                (double)x_wins / o_wins);
+    if (counter % 1000 == 0) {
+      SPDLOG_INFO("X: {}, O: {}, Ratio: {}", x_wins, o_wins,
+                  (double)x_wins / o_wins);
+    }
 
-    player2.update_value_function(record, 0.9, 0.3);
+    player2.update_value_function(record, 0.95, 0.1);
+    counter++;
   }
 }
 

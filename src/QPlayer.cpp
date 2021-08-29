@@ -1,9 +1,8 @@
-#include "QPlayer.hpp"
-
 #include <spdlog/spdlog.h>
 
 #include <algorithm>
 #include <optional>
+#include <tictactoe/QPlayer.hpp>
 #include <vector>
 
 QPlayer::QPlayer(std::shared_ptr<Board> board, Field field)
@@ -47,7 +46,6 @@ std::vector<float> QPlayer::determine_state_scores(const GameRecord& record,
 
   unsigned int states_length = record.states.size();
   auto winner = record.winner;
-  float score;
   if (!winner.has_value()) {
     scores[states_length - 1] = 0;
   } else if (winner.value() == _field) {
